@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+    invoke-ai-core:
+        image: ${CORE_IMAGE}
+        container_name: invoke-ai
+        build:
+            args:
+                - PYTHON_VERSION=${PYTHON_VERSION}
+                - PIP_VERSION=${PIP_VERSION}
+                - PYTORCH_VERSION=${PYTORCH_VERSION}
+                - CUDA_VERSION=${CUDA_VERSION}
+                - INVOKE_AI_VERSION=${INVOKE_AI_VERSION}
+                - MODEL_NAME=${MODEL_NAME}
+
+    invoke-ai-gpu:
+        network_mode: host
+        image: ${CORE_IMAGE}
+        container_name: invoke-ai-gpu
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - capabilities: [ gpu ]
+        shm_size: '8gb'
+        env_file:
+            - .env
+        ports:
+        - "9090:9090"
+
+    invoke-ai-cpu:
+        network_mode: host
+        image: ${CORE_IMAGE}
+        container_name: invoke-ai-cpu
+        shm_size: '8gb'
+        env_file:
+            - .env
+        ports:
+        - "9090:9090"
