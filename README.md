@@ -1,20 +1,18 @@
 # invoke-ai-docker
+<br/>
 
 Setup
 -----
 
 This repo requires [docker](https://docs.docker.com/engine/install/ubuntu/) 20.10 or above and docker-compose-plugin 2.12 or above
 
-You also need the latest version of[nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html)
-
+You also need the latest version of [nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html)
 <br/>
-
 
 Build & run
 -----------
 
 Before build you should login in Hugging Face and download the model ([sd-v1-4.ckpt](https://huggingface.co/CompVis/stable-diffusion-v-1-4-original)) in ./models
-
 <br/>
 
 ##### Build
