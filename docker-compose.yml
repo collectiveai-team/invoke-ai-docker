@@ -26,6 +26,8 @@ services:
             - .env
         ports:
         - "9090:9090"
+        volumes:
+            - $PWD/outputs:/root/InvokeAI/outputs
 
     invoke-ai-cpu:
         network_mode: host
@@ -36,3 +38,5 @@ services:
             - .env
         ports:
         - "9090:9090"
+        volumes:
+            - $PWD/outputs:/root/InvokeAI/outputs
