@@ -4,8 +4,15 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
 
 # OS packages
+RUN sed -i 's/# deb-src/deb-src/' /etc/apt/sources.list \
+    && apt-get update --fix-missing
+
+RUN apt-get install -y --no-install-recommends \
+    software-properties-common \
+    && add-apt-repository ppa:deadsnakes/ppa
+
 ARG PYTHON_VERSION
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get install -y --no-install-recommends \
     curl \
     wget \
     git-core \
