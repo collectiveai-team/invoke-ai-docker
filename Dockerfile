@@ -1,18 +1,11 @@
-FROM nvcr.io/nvidia/cuda:11.6.2-cudnn8-runtime-ubuntu20.04
+FROM nvcr.io/nvidia/cuda:11.7.1-runtime-ubuntu22.04
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
 
 # OS packages
-RUN sed -i 's/# deb-src/deb-src/' /etc/apt/sources.list \
-    && apt-get update --fix-missing
-
-RUN apt-get install -y --no-install-recommends \
-    software-properties-common \
-    && add-apt-repository ppa:deadsnakes/ppa
-
 ARG PYTHON_VERSION
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     wget \
     git-core \
