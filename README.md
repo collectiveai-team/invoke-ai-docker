@@ -1,9 +1,10 @@
-# `invoke-ai-docker`: Simple and easy [InvokeAI](https://github.com/invoke-ai/InvokeAI) docker setup
+# `invoke-ai-docker`: Simple and easy [InvokeAI](https://github.com/invoke-ai/InvokeAI) docker setup with GPU support
 
 <br/>
 
 ## Setup
 --------
+
 <br/>
 
 * Install the lastest version of Make:
@@ -26,6 +27,8 @@
 
 ## Build & run
 --------------
+
+<br/>
 
 * Build the docker image:
     ```bash
