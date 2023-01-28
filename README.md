@@ -15,8 +15,6 @@ If you want to run the inference on GPU you also need the latest version of [nvi
 
 Build & run
 -----------
-
-Before build you should login in Hugging Face and download the model ([v1-5-pruned-emaonly.ckpt](https://huggingface.co/runwayml/stable-diffusion-v1-5)) in ./models
 <br/>
 
 ##### Build

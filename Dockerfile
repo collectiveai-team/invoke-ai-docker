@@ -1,15 +1,14 @@
-FROM nvcr.io/nvidia/cuda:11.7.1-runtime-ubuntu22.04
+FROM nvcr.io/nvidia/cuda:11.7.1-cudnn8-runtime-ubuntu22.04
 
-ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV DEBIAN_FRONTEND noninteractive
-
-# OS packages
+# Install OS packages
 ARG PYTHON_VERSION
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     wget \
     git-core \
     unzip \
+    zsh \
+    poppler-utils \
     python3-setuptools \
     libgl1-mesa-glx \
     libglib2.0-0 \
@@ -20,7 +19,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/tmp/* /var/lib/apt/lists/*
 
-# Set default python version
+# Set the default python version
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_VERSION} 1 \
     && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python${PYTHON_VERSION} 1
 
@@ -33,11 +32,13 @@ RUN wget https://github.com/pypa/pip/archive/refs/tags/${PIP_VERSION}.zip \
     && cd pip-${PIP_VERSION} \
     && python setup.py install
 
-# Install pytorch
+# Install pytorch & torchvision
 ARG CUDA_VERSION
 ARG PYTORCH_VERSION
+ARG TORCHVISION_VERSION
 RUN --mount=type=cache,target=/root/.cache \
     pip install torch==${PYTORCH_VERSION}+${CUDA_VERSION} \
+    torchvision==${TORCHVISION_VERSION}+${CUDA_VERSION} \
     -f https://download.pytorch.org/whl/${CUDA_VERSION}/torch_stable.html
 
 WORKDIR /root
@@ -46,12 +47,17 @@ WORKDIR /root
 ARG INVOKE_AI_VERSION
 RUN git clone https://github.com/invoke-ai/InvokeAI.git \
     && cd ./InvokeAI && git checkout ${INVOKE_AI_VERSION} \
-    && pip install -r requirements.txt \
-    && python scripts/preload_models.py
+    && pip install -r environments-and-requirements/requirements-base.txt
 
-# Copy the model
-ARG MODEL_NAME
-COPY ./models/${MODEL_NAME} InvokeAI/models/ldm/stable-diffusion-v1/model.ckpt
+WORKDIR /root/InvokeAI
+
+RUN cd scripts \
+    && ln -s ../ldm ldm \
+    && ln -s ../backend backend \
+    && ln -s ../frontend frontend \
+    && ln -s ../static scripts
+
+RUN python scripts/configure_invokeai.py -y
 
 COPY ./entrypoint.sh /usr/bin/entrypoint.sh
 ENTRYPOINT sh /usr/bin/entrypoint.sh

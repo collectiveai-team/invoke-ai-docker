@@ -8,9 +8,9 @@ services:
                 - PYTHON_VERSION=${PYTHON_VERSION}
                 - PIP_VERSION=${PIP_VERSION}
                 - PYTORCH_VERSION=${PYTORCH_VERSION}
+                - TORCHVISION_VERSION=${TORCHVISION_VERSION}
                 - CUDA_VERSION=${CUDA_VERSION}
                 - INVOKE_AI_VERSION=${INVOKE_AI_VERSION}
-                - MODEL_NAME=${MODEL_NAME}
 
     invoke-ai-gpu:
         network_mode: host
@@ -21,7 +21,7 @@ services:
                 reservations:
                     devices:
                         - capabilities: [ gpu ]
-        shm_size: '8gb'
+        shm_size: '16gb'
         env_file:
             - .env
         ports:
@@ -33,7 +33,7 @@ services:
         network_mode: host
         image: ${CORE_IMAGE}
         container_name: invoke-ai-cpu
-        shm_size: '8gb'
+        shm_size: '16gb'
         env_file:
             - .env
         ports:
