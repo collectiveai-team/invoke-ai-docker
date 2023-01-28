@@ -5,8 +5,6 @@
 ## Setup
 --------
 
-<br/>
-
 * Install the lastest version of Make:
     ```bash
     $ sudo apt update
@@ -27,8 +25,6 @@
 
 ## Build & run
 --------------
-
-<br/>
 
 * Build the docker image:
     ```bash
