@@ -1,31 +1,42 @@
-# invoke-ai-docker
+# `invoke-ai-docker`: Simple and easy [InvokeAI](https://github.com/invoke-ai/InvokeAI) docker setup
+
 <br/>
 
-Setup
------
-
-This repo requires:
-
-    - make 4.3 or above 
-    - docker 20.10 or above
-    - docker-compose-plugin 2.12 or above
-
-If you want to run the inference on GPU you also need the latest version of [nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html)
+## Setup
+--------
 <br/>
 
-Build & run
------------
+* Clone the repo:
+    ```bash
+    $ git@github.com:collectiveai-team/invoke-ai-docker.git
+    ```
+
+* Install the lastest version of Make:
+    ```bash
+    $ sudo apt update
+    $ sudo apt install make
+    ```
+
+* Install the latest version of [Docker](https://docs.docker.com/engine/install/ubuntu/) including the `compose plugin`, also requires enabling the [Buildkit](https://docs.docker.com/build/buildkit/) backend
+
+* Install the latest version of the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html)
+
 <br/>
 
-##### Build
-```bash
-$ make build
-```
-##### Run on GPU
-```bash
-$ make run
-```
-##### Run on CPU
-```bash
-$ make run-cpu
-```
+## Build & run
+--------------
+
+* Build the docker image:
+    ```bash
+    $ make build
+    ```
+
+* Run the image on `gpu`:
+    ```bash
+    $ make run
+    ```
+
+* Run the image on `cpu`:
+    ```bash
+    $ make run-cpu
+    ```
