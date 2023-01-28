@@ -1,5 +1,2 @@
-models/*
-!models/.gitkeep
-
 outputs/*
 !outputs/.gitkeep
