@@ -6,11 +6,6 @@
 --------
 <br/>
 
-* Clone the repo:
-    ```bash
-    $ git@github.com:collectiveai-team/invoke-ai-docker.git
-    ```
-
 * Install the lastest version of Make:
     ```bash
     $ sudo apt update
@@ -20,6 +15,12 @@
 * Install the latest version of [Docker](https://docs.docker.com/engine/install/ubuntu/) including the `compose plugin`, also requires enabling the [Buildkit](https://docs.docker.com/build/buildkit/) backend
 
 * Install the latest version of the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html)
+
+* Get the repo:
+    ```bash
+    $ git clone git@github.com:collectiveai-team/invoke-ai-docker.git
+    $ cd invoke-ai-docker
+    ```
 
 <br/>
 
